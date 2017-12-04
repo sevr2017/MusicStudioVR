@@ -12,6 +12,8 @@ public class SurfaceCollision : MonoBehaviour
     public float VelocityUpLimit = 8f;
     public int colorDelayCycle=35;
     public Color DrumColor;
+    public string name;
+    public Transform Recorder;
 
 
     private float colorVolumn;
@@ -51,6 +53,7 @@ public class SurfaceCollision : MonoBehaviour
         {
             //sound
             drumAudio.volume = other.GetComponent<Rigidbody>().velocity.magnitude / VelocityUpLimit;
+            Recorder.GetComponent<Recorder>().doRecord(name, drumAudio.volume);
             drumAudio.Play();
 
             //vision
