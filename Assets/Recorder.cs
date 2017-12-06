@@ -64,6 +64,6 @@ public class Recorder : MonoBehaviour {
     }
 
     public void doRecord(string instrument, float volumn) {
-        soundRecords.Add(new Record(instrument, volumn));
+        //soundRecords.Add(new Record(instrument, volumn));
     }
 }
