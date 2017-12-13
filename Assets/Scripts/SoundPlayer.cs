@@ -20,4 +20,14 @@ public class SoundPlayer : MonoBehaviour {
             drumAudio.Play();
         
     }
+    public void stop() {
+        drumAudio.Stop();
+    }
+
+    public void setPitch(float i) {
+        drumAudio.pitch = i;
+    }
+    public float getPitch() {
+        return drumAudio.pitch;
+    }
 }
