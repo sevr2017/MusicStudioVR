@@ -15,9 +15,9 @@ public class DrumStickContoller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetButtonDown("Fire1")) {
-            Debug.Log("here");
-            stick.GetComponent<Rigidbody>().AddForce(new Vector3(0, -1, 0)*100);
+        if (Input.GetButton("Fire1")) {
+            //Debug.Log("here");
+            stick.transform.position-=new Vector3(0,0.02f,0);
             //StartCoroutine(StickHit());
         }
         if (Input.GetButtonUp("Fire1")) {
