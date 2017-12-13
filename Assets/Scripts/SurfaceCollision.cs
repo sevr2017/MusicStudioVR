@@ -53,7 +53,7 @@ public class SurfaceCollision : MonoBehaviour
         {
             //sound
             drumAudio.volume = other.GetComponent<Rigidbody>().velocity.magnitude / VelocityUpLimit;
-            Recorder.GetComponent<Recorder>().doRecord(name, drumAudio.volume);
+            //Recorder.GetComponent<Recorder>().doRecord(name, drumAudio.volume);
             drumAudio.Play();
 
             //vision
