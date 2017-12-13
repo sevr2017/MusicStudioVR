@@ -44,28 +44,30 @@ public class SurfaceCollision : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         //other.gameObject.SetActive(false);
-        // Debug.Log(other.gameObject);
+         Debug.Log(other.gameObject);
         //up 
         Quaternion rotation = Quaternion.Euler(0f, 0f, 0f) * transform.rotation;
         Vector3 up =rotation* new Vector3(0, 1, 0);
-        float angle = Vector3.Angle(up, other.GetComponent<Rigidbody>().velocity);
-        if (transform.gameObject.name == "upSurface" && angle>90)
+        float angle = Vector3.Angle(up, other.GetComponent<FakeVelocity>().velocity);
+
+        if (angle > 90f)
         {
+
             //sound
-            drumAudio.volume = other.GetComponent<Rigidbody>().velocity.magnitude / VelocityUpLimit;
+            drumAudio.volume = other.GetComponent<FakeVelocity>().velocity.magnitude / VelocityUpLimit*0.5f;
             //Recorder.GetComponent<Recorder>().doRecord(name, drumAudio.volume);
             drumAudio.Play();
 
             //vision
-            Debug.Log(transform.gameObject.name + ": v:" + other.GetComponent<Rigidbody>().velocity + " "+angle);
-            colorVolumn = (other.GetComponent<Rigidbody>().velocity.magnitude / VelocityUpLimit)*0.8f;
-       
+            Debug.Log(transform.gameObject.name + ": v:" + other.GetComponent<FakeVelocity>().velocity + " " + angle);
+            colorVolumn = (other.GetComponent<FakeVelocity>().velocity.magnitude / VelocityUpLimit) * 0.8f;
+
             StopAllCoroutines();
             StartCoroutine(ColorFade(colorVolumn));
-
-
-
         }
+
+
+
 
     }
 
