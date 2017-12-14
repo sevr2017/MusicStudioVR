@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+public enum InstrumentType { Drum, Trumpet };
 
 public class Recorder : MonoBehaviour {
+   
+
     public long maxTime=36000;
     private List<Record> soundRecords;
     private long endTime;
@@ -16,14 +18,21 @@ public class Recorder : MonoBehaviour {
 
     private class Record
     {
-        SoundPlayer instrumentSP;
+        public SoundPlayer instrumentSP;
+        public InstrumentType type;
         public long time;
-        float volume;
+        public float volume;
+        public int state;
+        public float pitch;
         public Record (){}
-        public Record(SoundPlayer i, float v) {  instrumentSP = i; volume = v; time = recordTimer; }
+        public Record(SoundPlayer i, float v, InstrumentType t) {  instrumentSP = i; volume = v; time = recordTimer; type = t; }
+        public Record(SoundPlayer i, float v, float p, InstrumentType t, int s) { instrumentSP = i; volume = 1; time = recordTimer; type = t; pitch = p; state = s; }
 
         public void Play() {
             instrumentSP.play(volume);
+        }
+        public void Stop() {
+            instrumentSP.stop();
         }
         
     };
@@ -89,7 +98,16 @@ public class Recorder : MonoBehaviour {
                 if (i.time == playTimer)
                 {
                     //Debug.Log("play success!!");
-                    i.Play();
+                    if (i.type == InstrumentType.Drum)
+                    {
+                        i.Play();
+                    }
+                    else if (i.type == InstrumentType.Trumpet) {
+                        if (i.state == 1) { i.instrumentSP.setPitch(i.pitch); i.instrumentSP.play(1); }
+                        else if (i.state == 0) { i.instrumentSP.setPitch(i.pitch); }
+                        else if (i.state == -1) { i.instrumentSP.stop(); }
+                    }
+                    
                 }
             }
             playTimer += 1;
@@ -128,11 +146,22 @@ public class Recorder : MonoBehaviour {
         isRecording = false;
     }
 
-    public void doRecord(SoundPlayer instrument, float volumn) {
+    public void doRecord(SoundPlayer instrument, float volumn, InstrumentType type) {
         if (isRecording)
         {
             Debug.Log("sound recorded!!"+volumn);
-            soundRecords.Add(new Record(instrument, volumn));
+            
+            soundRecords.Add(new Record(instrument, volumn,type));
+        }
+    }
+
+    public void doRecord(SoundPlayer instrument, float volumn, float pitch, InstrumentType type,int state)
+    {
+        if (isRecording)
+        {
+            Debug.Log("sound recorded!!" + volumn);
+
+            soundRecords.Add(new Record(instrument, volumn, pitch, type, state));
         }
     }
 

@@ -59,7 +59,7 @@ public class SurfaceCollision : MonoBehaviour
             //sound
             float volume = other.GetComponent<FakeVelocity>().velocity.magnitude / VelocityUpLimit * 0.5f;
             sp.play( volume);
-            Recorder.GetComponent<Recorder>().doRecord(sp, volume);
+            Recorder.GetComponent<Recorder>().doRecord(sp, volume, InstrumentType.Drum);
             //drumAudio.Play();
 
             //vision
