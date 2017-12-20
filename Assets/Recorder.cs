@@ -101,6 +101,7 @@ public class Recorder : MonoBehaviour {
 
     private void stopRecord() {
         Debug.Log("stop recording!!");
+        endTime = recordTimer;
         isRecording = false;
     }
 
