@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundPlayer : MonoBehaviour {
     public AudioClip hitClip;
-    AudioSource drumAudio;
+    public AudioSource drumAudio;
     [HideInInspector]
     public bool isPlaying=false;
 

@@ -3,7 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum InstrumentType { Drum, Trumpet };
+public class RecordSoundPlayer 
+{
+    public AudioClip hitClip;
+    AudioSource drumAudio;
+    [HideInInspector]
+    public bool isPlaying = false;
 
+    public RecordSoundPlayer(SoundPlayer sp) {
+        this.hitClip = sp.hitClip;
+        this.drumAudio = sp.drumAudio;
+    }
+
+    public void play(float volume)
+    {
+
+        drumAudio.volume = volume;
+        drumAudio.Play();
+        isPlaying = true;
+
+    }
+    public void stop()
+    {
+        drumAudio.Stop();
+        isPlaying = false;
+    }
+
+    public void setPitch(float i)
+    {
+        drumAudio.pitch = i;
+    }
+    public float getPitch()
+    {
+        return drumAudio.pitch;
+    }
+}
 public class Recorder : MonoBehaviour {
    
 
@@ -18,15 +52,15 @@ public class Recorder : MonoBehaviour {
 
     private class Record
     {
-        public SoundPlayer instrumentSP;
+        public RecordSoundPlayer instrumentSP;
         public InstrumentType type;
         public long time;
         public float volume;
         public int state;
         public float pitch;
         public Record (){}
-        public Record(SoundPlayer i, float v, InstrumentType t) {  instrumentSP = i; volume = v; time = recordTimer; type = t; }
-        public Record(SoundPlayer i, float v, float p, InstrumentType t, int s) { instrumentSP = i; volume = 1; time = recordTimer; type = t; pitch = p; state = s; }
+        public Record(RecordSoundPlayer i, float v, InstrumentType t) {  instrumentSP = i; volume = v; time = recordTimer; type = t; }
+        public Record(RecordSoundPlayer i, float v, float p, InstrumentType t, int s) { instrumentSP = i; volume = 1; time = recordTimer; type = t; pitch = p; state = s; }
 
         public void Play() {
             instrumentSP.play(volume);
@@ -103,8 +137,9 @@ public class Recorder : MonoBehaviour {
                         i.Play();
                     }
                     else if (i.type == InstrumentType.Trumpet) {
+                        Debug.Log("trumpet log:" + i.state + "  " + i.pitch);
                         if (i.state == 1) { i.instrumentSP.setPitch(i.pitch); i.instrumentSP.play(1); }
-                        else if (i.state == 0) { i.instrumentSP.setPitch(i.pitch); }
+                        else if (i.state == 0) { i.instrumentSP.setPitch(i.pitch); Debug.Log("trumpet pitch:" +i.instrumentSP.getPitch()); }
                         else if (i.state == -1) { i.instrumentSP.stop(); }
                     }
                     
@@ -151,7 +186,7 @@ public class Recorder : MonoBehaviour {
         {
             Debug.Log("sound recorded!!"+volumn);
             
-            soundRecords.Add(new Record(instrument, volumn,type));
+            soundRecords.Add(new Record(new RecordSoundPlayer(instrument), volumn,type));
         }
     }
 
@@ -160,8 +195,9 @@ public class Recorder : MonoBehaviour {
         if (isRecording)
         {
             Debug.Log("sound recorded!!" + volumn);
-
-            soundRecords.Add(new Record(instrument, volumn, pitch, type, state));
+            RecordSoundPlayer tmp = new RecordSoundPlayer(instrument);
+            
+            soundRecords.Add(new Record(tmp, volumn, pitch, type, state));
         }
     }
 
