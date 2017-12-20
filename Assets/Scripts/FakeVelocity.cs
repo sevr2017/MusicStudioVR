@@ -7,7 +7,7 @@ public class FakeVelocity : MonoBehaviour {
     Vector3 lastPos;
 
     public Vector3 velocity;
-
+	public Vector3 lastNonZeroVelocity;
 
 	// Use this for initialization
 	void Start () {
@@ -18,5 +18,9 @@ public class FakeVelocity : MonoBehaviour {
 	void Update () {
         velocity = (transform.position - lastPos) / Time.deltaTime;
         lastPos = transform.position;
+
+		if(velocity.magnitude > 0f){
+			lastNonZeroVelocity = velocity;
+		}
 	}
 }
