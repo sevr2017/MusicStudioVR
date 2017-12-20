@@ -37,6 +37,8 @@ public class MusicEffectController : MonoBehaviour {
 
 	public AnimationCurve curve;
 
+	public string controllerTag = "EffectController";
+
 	Collider effectCollider;
 	Renderer rend;
 
@@ -127,7 +129,7 @@ public class MusicEffectController : MonoBehaviour {
 	}
 
 	void TrySetInController(Collider coll){
-		if(inController == null){
+		if(inController == null && coll.gameObject.tag == controllerTag){
 			inController = coll;
 			inPosition = effectCollider.ClosestPoint(coll.transform.position);
 			// inPosition = coll.transform.position;
