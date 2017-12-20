@@ -226,7 +226,7 @@ MonoBehaviour:
   inDirection: {x: 0, y: 0, z: 0}
   inVelocity: {x: 0, y: 0, z: 0}
   inMaxDistance: 0
-  startColor: {r: 1, g: 1, b: 1, a: 0.76862746}
+  startColor: {r: 0, g: 0, b: 0, a: 0.76862746}
   endColor: {r: 1, g: 0, b: 0, a: 0.76862746}
   flangeEndColor: {r: 0, g: 1, b: 0, a: 0.76862746}
   curve:

@@ -69,7 +69,8 @@ public class MusicEffectController : MonoBehaviour {
 				musicMixer.SetFloat (flangeRate, rateOutput);
 
 				Color flangeColor = Color.Lerp (startColor, flangeEndColor, tickFactor);
-				Color final = flangeColor * lowpassColor;
+				Color final = flangeColor + lowpassColor;
+				final = new Color(final.r, final.g, final.b, flangeColor.a);
 				rend.material.SetColor ("_Color", final);
 
 			} else {
