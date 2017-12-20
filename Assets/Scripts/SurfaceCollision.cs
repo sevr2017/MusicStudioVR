@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+ 
 
 
 public class SurfaceCollision : MonoBehaviour
@@ -13,22 +13,19 @@ public class SurfaceCollision : MonoBehaviour
     public float VelocityUpLimit = 8f;
     public int colorDelayCycle=35;
     public Color DrumColor;
-    public string name;
+    //public string name;
     public Transform Recorder;
-
 
     private float colorVolumn;
     private float ColorChangeRate = 1/15;
 
-
-    IEnumerator coroutine;
+    //IEnumerator coroutine;
 
     private void Awake()
     {
         sp = this.GetComponent<SoundPlayer>();
        // drumAudio = GetComponent<AudioSource>();
        // drumAudio.clip = hitClip;
-
     }
     // Use this for initialization
     void Start()
@@ -96,22 +93,5 @@ public class SurfaceCollision : MonoBehaviour
             }
             yield return 0;
         }
-
-        //for (int i = 0; i < progress; i++) { 
-        //    transform.gameObject.GetComponent<MeshRenderer>().material.color = tmpColor;
-        //    //float tmp = (float)i / 1000 * 20;
-        //    if (i < progress / 4) {; }
-        //    else if (i % (progress - (progress / 4 )/ 15) == 0) {
-        //        tmpColor.g += (1f * colorVolumn) / 15;
-        //        tmpColor.b += (1f * colorVolumn) / 15;
-        //       // Debug.Log("runing");
-        //    }
-            
-        //    yield return 0;
-        //}
-        //tmpColor.g = 1f ;
-        //tmpColor.b = 1f;
-
-
     }
 }
