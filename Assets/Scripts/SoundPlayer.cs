@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SoundPlayer : MonoBehaviour {
     public AudioClip hitClip;
-    AudioSource drumAudio;
+    public AudioSource drumAudio;
+    [HideInInspector]
+    public bool isPlaying=false;
 
     private void Awake()
     {
@@ -18,6 +20,18 @@ public class SoundPlayer : MonoBehaviour {
        
             drumAudio.volume = volume;
             drumAudio.Play();
+        isPlaying = true;
         
+    }
+    public void stop() {
+        drumAudio.Stop();
+        isPlaying = false;
+    }
+
+    public void setPitch(float i) {
+        drumAudio.pitch = i;
+    }
+    public float getPitch() {
+        return drumAudio.pitch;
     }
 }

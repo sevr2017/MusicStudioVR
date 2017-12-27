@@ -47,6 +47,7 @@ public class SurfaceCollision : MonoBehaviour
         //up 
         Quaternion rotation = Quaternion.Euler(0f, 0f, 0f) * transform.rotation;
         Vector3 up =rotation* new Vector3(0, 1, 0);
+        Debug.Log("test:" + other.name);
         float angle = Vector3.Angle(up, other.GetComponent<FakeVelocity>().velocity);
        // Debug.Log(other.gameObject+" "+angle);
         if (angle >= 90f)
@@ -55,7 +56,7 @@ public class SurfaceCollision : MonoBehaviour
             //sound
             float volume = other.GetComponent<FakeVelocity>().velocity.magnitude / VelocityUpLimit * 0.5f;
             sp.play( volume);
-            Recorder.GetComponent<Recorder>().doRecord(sp, volume);
+            Recorder.GetComponent<Recorder>().doRecord(sp, volume, InstrumentType.Drum);
             //drumAudio.Play();
 
             //vision
