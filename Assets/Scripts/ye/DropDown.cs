@@ -9,9 +9,14 @@ public class DropDown : MonoBehaviour {
 
     public GameObject[] InstrumentList;
 
+    //public GameObject[] ClipList;
+
+    //public AudioSource BgmSource;
+
     Dropdown dropDown;
 
     public void showInstrument(int index){
+        Debug.Log("here");
         if (index == 0)
         {
             foreach (GameObject k in InstrumentList)
@@ -29,10 +34,9 @@ public class DropDown : MonoBehaviour {
         }
     }
 
-
     void Start () {
         dropDown = GetComponent<Dropdown>();
-        PopulateList();
+        PopulateList();  
 	}
 
     void PopulateList()

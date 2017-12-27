@@ -72,10 +72,10 @@ public class Recorder : MonoBehaviour {
         {
             foreach (Record i in soundRecords)
             {
-                Debug.Log("my time:" + i.time + " player timer:" + playTimer);
+                //Debug.Log("my time:" + i.time + " player timer:" + playTimer);
                 if (i.time == playTimer)
                 {
-                    Debug.Log("play success!!");
+                    //Debug.Log("play success!!");
                     i.Play();
                 }
             }
@@ -86,20 +86,20 @@ public class Recorder : MonoBehaviour {
 
 	}
 
-    private void Reset()
+    public void Reset()
     {
         recordTimer = 0;
         playTimer = 0;
         soundRecords.Clear();
     }
 
-    private void startRecord() {
+    public void startRecord() {
         Debug.Log("start recording!!");
         recordTimer = 0;
         isRecording = true;
     }
 
-    private void stopRecord() {
+    public void stopRecord() {
         Debug.Log("stop recording!!");
         endTime = recordTimer;
         isRecording = false;
