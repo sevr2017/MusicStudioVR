@@ -43,7 +43,7 @@ public class SurfaceCollision : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         //other.gameObject.SetActive(false);
-         //Debug.Log(other.gameObject);
+         Debug.Log(other.gameObject);
         //up 
         Quaternion rotation = Quaternion.Euler(0f, 0f, 0f) * transform.rotation;
         Vector3 up =rotation* new Vector3(0, 1, 0);

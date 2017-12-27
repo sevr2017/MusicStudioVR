@@ -17,7 +17,6 @@ public class RecordSoundPlayer
 
     public void play(float volume)
     {
-
         drumAudio.volume = volume;
         drumAudio.Play();
         isPlaying = true;
