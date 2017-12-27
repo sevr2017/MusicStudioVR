@@ -182,7 +182,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742e8b51515d9504097d4509e7781c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitClip: {fileID: 8300000, guid: 1f4c8f5a360b65f4b8be5d90f8d2c90a, type: 3}
   VelocityUpLimit: 8
   colorDelayCycle: 35
   DrumColor: {r: 0.7205882, g: 0.30201122, b: 0.70904136, a: 0.578}
+  Recorder: {fileID: 0}

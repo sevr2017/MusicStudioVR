@@ -12,6 +12,9 @@ public class DiskController : MonoBehaviour {
 	public Transform originalRightPoint;
 	public float normalDegree;
 	public int startingPitch;
+
+	public DjTrigger djTriggerL;
+	public DjTrigger djTriggerR;
 	
 	private Vector3 xVector, yVector, zVector;
 	private Vector3 leftFootPoint, rightFootPoint;
@@ -53,15 +56,19 @@ public class DiskController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if (manager == null || originalLeftPoint == null || originalRightPoint == null ) {
+		if (originalLeftPoint == null || originalRightPoint == null ) {
 			return;
 		}
 		leftDegree = 0;
 		rightDegree  = 0;
-		if (manager.rightTriggerAxis.x>0) {
-			print("control by right trigger");
+		if (djTriggerR && djTriggerR.controller) {
+			// print("control by right trigger");
+
+			Vector3 controllerPos = djTriggerR.controller.position;
 			
-			steeringWheelVectorRight = new Vector3(originalRightPoint.position.x-manager.rightControllerPosition.x,originalRightPoint.position.y,originalRightPoint.position.z-manager.rightControllerPosition.z); //- leftFootPoint;
+			steeringWheelVectorRight = new Vector3(originalRightPoint.position.x-controllerPos.x,
+				originalRightPoint.position.y,
+				originalRightPoint.position.z-controllerPos.z); //- leftFootPoint;
 			
 			float tmpDegree1 = Vector3.Angle (steeringWheelVectorRight, new Vector3(0,0,1));
 			Debug.Log("NOWDegree : "+ tmpDegree1);
@@ -72,10 +79,14 @@ public class DiskController : MonoBehaviour {
 
 		} 
 
-		if (manager.leftTriggerAxis.x>0) {
-			print("control by right trigger");
+		if (djTriggerL && djTriggerL.controller) {
+			// print("control by right trigger");
+
+			Vector3 controllerPos = djTriggerL.controller.position;
 			
-			steeringWheelVectorLeft = new Vector3(originalLeftPoint.position.x-manager.leftControllerPosition.x,originalLeftPoint.position.y,originalLeftPoint.position.z-manager.leftControllerPosition.z); //- leftFootPoint;
+			steeringWheelVectorLeft = new Vector3(originalLeftPoint.position.x-controllerPos.x,
+				originalLeftPoint.position.y,
+				originalLeftPoint.position.z-controllerPos.z); //- leftFootPoint;
 			
 			float tmpDegree2 = Vector3.Angle (steeringWheelVectorLeft, new Vector3(0,0,1));
 			Debug.Log("NOWDegree : "+ tmpDegree2);
