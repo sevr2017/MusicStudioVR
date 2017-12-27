@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class TrumpetController : MonoBehaviour {
     SoundPlayer sp;
     public Recorder recorder;
+   // public ControllerManager manager;
     //AudioSource audiosou;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         sp = GetComponent<SoundPlayer>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.L)) {
+        if (Input.GetKeyDown(KeyCode.L)/*||manager.rightControllerTouchDown.trigger*/) {
             play();
 
         }
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K)/*||! manager.rightControllerTouchDown.trigger*/)
         {
             stop();
 
