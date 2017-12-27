@@ -10,11 +10,14 @@ public class TrumpetController : MonoBehaviour {
     public GameObject push1;
     public GameObject push2;
     public GameObject push3;
+
+    private float parentScale = 3.0f;
+    private float pushInity=0.1771553f;
     // public ControllerManager manager;
     //AudioSource audiosou;
     // Use this for initialization
 
-    private float upDist=0.1f;
+    private float upDist=0.03f;
     void Start () {
         sp = GetComponent<SoundPlayer>();
 	}
@@ -40,10 +43,10 @@ public class TrumpetController : MonoBehaviour {
     void OnTriggerStay(Collider other)
     {
 
-        float test = ((int)(Vector3.Dot((other.transform.position - this.transform.position), transform.forward)/(transform.localScale.z/2)*3))/3.0f;
+        float test = ((int)(Vector3.Dot((other.transform.position - this.transform.position), transform.forward)/(transform.localScale.z/2))*3.0f)/3.0f/ parentScale;
         float delta = (other.transform.position.z-this.transform.position.z)/(this.transform.localScale.z/2);
         Debug.Log(test);
-        float animate = (Vector3.Dot((other.transform.position - this.transform.position), transform.forward) / (transform.localScale.z / 2));//-1 ~ 1
+        float animate = (Vector3.Dot((other.transform.position - this.transform.position), transform.forward) / (transform.localScale.z / 2))/ parentScale;//-1 ~ 1
 
         if (canPlay == true)
         {
@@ -67,9 +70,9 @@ public class TrumpetController : MonoBehaviour {
             else if (push2ratio > 1) { push2ratio = 1; }
             if (push3ratio < 0) { push3ratio = 0; }
             else if (push3ratio > 1) { push3ratio = 1; }
-            push1.transform.localPosition = new Vector3(push1.transform.localPosition.x,  push1ratio, push1.transform.localPosition.z);
-            push2.transform.localPosition = new Vector3(push2.transform.localPosition.x,  push2ratio, push2.transform.localPosition.z);
-            push3.transform.localPosition = new Vector3(push3.transform.localPosition.x,  push3ratio, push3.transform.localPosition.z);
+            push1.transform.localPosition = new Vector3(push1.transform.localPosition.x, pushInity - upDist*push1ratio, push1.transform.localPosition.z);
+            push2.transform.localPosition = new Vector3(push2.transform.localPosition.x, pushInity - upDist * push2ratio, push2.transform.localPosition.z);
+            push3.transform.localPosition = new Vector3(push3.transform.localPosition.x, pushInity - upDist * push3ratio, push3.transform.localPosition.z);
         }
         else {
             sp.stop();
