@@ -39,6 +39,8 @@ public class MusicEffectController : MonoBehaviour {
 
 	public string controllerTag = "EffectController";
 
+	public float emissionFactor = 3f;
+
 	Collider effectCollider;
 	Renderer rend;
 
@@ -59,7 +61,10 @@ public class MusicEffectController : MonoBehaviour {
 			//tickOutput = Mathf.Lerp (tickOutput, minLowpass, tickFactor);
 
 			Color lowpassColor = Color.Lerp (startColor, endColor, tickFactor);
-			rend.material.SetColor ("_Color", lowpassColor);
+
+//			rend.material.SetColor ("_Color", lowpassColor);
+			lowpassColor = lowpassColor * emissionFactor;
+			rend.material.SetColor ("_EmissionColor", lowpassColor);
 
 			tickFactor = GetVerticalTickFactor (coll);
 //			Debug.Log (tickFactor);
@@ -71,9 +76,13 @@ public class MusicEffectController : MonoBehaviour {
 				musicMixer.SetFloat (flangeRate, rateOutput);
 
 				Color flangeColor = Color.Lerp (startColor, flangeEndColor, tickFactor);
+				flangeColor = flangeColor * emissionFactor;
+
 				Color final = flangeColor + lowpassColor;
 				final = new Color(final.r, final.g, final.b, flangeColor.a);
-				rend.material.SetColor ("_Color", final);
+
+				rend.material.SetColor ("_EmissionColor", final);
+//				rend.material.SetColor ("_Color", final);
 
 			} else {
 				ResetFlange ();
@@ -125,7 +134,7 @@ public class MusicEffectController : MonoBehaviour {
 
 	void ResetLowpass(){
 		musicMixer.SetFloat (lowpassParamName, defaultLowpass);
-		rend.material.SetColor ("_Color", startColor);
+		rend.material.SetColor ("_EmissionColor", startColor);
 	}
 
 	void TrySetInController(Collider coll){

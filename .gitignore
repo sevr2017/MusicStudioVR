@@ -40,3 +40,4 @@ sysinfo.txt
 # Unity SteamVR Plugin
 /Assets/SteamVR*
 /Assets/Standard Assets*
+/Assets/External/*
